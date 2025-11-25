@@ -9,14 +9,14 @@
     "postgraphile": "NODE_OPTIONS=\"--experimental-strip-types\" postgraphile"
   },
   "dependencies": {
-    "@grafserv/persisted": "^1.0.0-rc.1",
+    "@grafserv/persisted": "^1.0.0-rc.2",
     "@graphile-contrib/pg-many-to-many": "^2.0.0-rc.1",
     "@graphile-contrib/pg-omit-archived": "^4.0.0-rc.1",
     "@graphile/pg-aggregates": "^0.2.0-rc.1",
-    "@graphile/simplify-inflection": "^8.0.0-rc.1",
+    "@graphile/simplify-inflection": "^8.0.0-rc.2",
     "express": "^4.18.2",
-    "graphile": "^5.0.0-rc.1",
-    "postgraphile": "^5.0.0-rc.1",
+    "graphile": "^5.0.0-rc.2",
+    "postgraphile": "^5.0.0-rc.3",
     "postgraphile-plugin-connection-filter": "^3.0.0-rc.1",
     "ws": "^8.13.0"
   },
