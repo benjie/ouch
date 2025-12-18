@@ -7,7 +7,7 @@ import { makePgSmartTagsFromFilePlugin } from "postgraphile/utils";
 import { PostGraphileConnectionFilterPreset } from "postgraphile-plugin-connection-filter";
 import { PgAggregatesPreset } from "@graphile/pg-aggregates";
 import { PgManyToManyPreset } from "@graphile-contrib/pg-many-to-many";
-// import { PgSimplifyInflectionPreset } from "@graphile/simplify-inflection";
+import { PgSimplifyInflectionPreset } from "@graphile/simplify-inflection";
 import PersistedPlugin from "@grafserv/persisted";
 import { PgOmitArchivedPlugin } from "@graphile-contrib/pg-omit-archived";
 import { dirname } from "path";
@@ -27,11 +27,15 @@ const preset: GraphileConfig.Preset = {
       /* Enter your V4 options here */
       graphiql: true,
       graphiqlRoute: "/",
+      simpleCollections: "only",
+      graphileBuildOptions: {
+        pgOmitListSuffix: true,
+      },
     }),
     PostGraphileConnectionFilterPreset,
     PgManyToManyPreset,
     PgAggregatesPreset,
-    // PgSimplifyInflectionPreset
+    PgSimplifyInflectionPreset,
   ],
   plugins: [PersistedPlugin.default, PgOmitArchivedPlugin, TagsFilePlugin],
   pgServices: [
