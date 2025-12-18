@@ -3,6 +3,8 @@ import "graphile-config";
 import { makePgService } from "@dataplan/pg/adaptors/pg";
 import AmberPreset from "postgraphile/presets/amber";
 import { makeV4Preset } from "postgraphile/presets/v4";
+import { context, get, lambda, listen, type Step } from "postgraphile/grafast";
+import { extendSchema } from "postgraphile/utils";
 import { makePgSmartTagsFromFilePlugin } from "postgraphile/utils";
 import { PostGraphileConnectionFilterPreset } from "postgraphile-plugin-connection-filter";
 import { PgAggregatesPreset } from "@graphile/pg-aggregates";
@@ -12,6 +14,7 @@ import PersistedPlugin from "@grafserv/persisted";
 import { PgOmitArchivedPlugin } from "@graphile-contrib/pg-omit-archived";
 import { dirname } from "path";
 import { fileURLToPath } from "url";
+import { jsonParse } from "postgraphile/@dataplan/json";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -33,7 +36,38 @@ const preset: GraphileConfig.Preset = {
     PgAggregatesPreset,
     // PgSimplifyInflectionPreset
   ],
-  plugins: [PersistedPlugin.default, PgOmitArchivedPlugin, TagsFilePlugin],
+  plugins: [
+    PersistedPlugin.default,
+    PgOmitArchivedPlugin,
+    TagsFilePlugin,
+    extendSchema((build) => {
+      const { users } = build.pgResources;
+      return {
+        typeDefs: /* GraphQL */ `
+          extend type Subscription {
+            userUpdated(id: ID!): User
+          }
+        `,
+        objects: {
+          Subscription: {
+            plans: {
+              userUpdated: {
+                subscribePlan(_$root, { $id }) {
+                  const $topic = lambda($id, (id) => `users:${id}:updated`);
+                  const $pgSubscriber = context().get("pgSubscriber");
+                  return listen($pgSubscriber, $topic, jsonParse);
+                },
+                plan($event: Step) {
+                  const $id = get($event, "id");
+                  return users.get({ id: $id });
+                },
+              },
+            },
+          },
+        },
+      };
+    }),
+  ],
   pgServices: [
     makePgService({
       // Database connection string:
