@@ -1,1 +1,1 @@
-src/graphile.config.ts
+export { default } from "./src/graphile.config.ts";
