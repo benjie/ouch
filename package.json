@@ -4,9 +4,11 @@
   "private": true,
   "scripts": {
     "start": "yarn && GRAPHILE_ENV=production yarn run server:express",
+    "start:production": "GRAPHILE_ENV=production node dist/server-express.js",
     "dev": "yarn && GRAPHILE_ENV=development yarn run server:express",
     "server:express": "node --experimental-strip-types src/server-express.ts",
-    "postgraphile": "NODE_OPTIONS=\"--experimental-strip-types\" postgraphile"
+    "postgraphile": "NODE_OPTIONS=\"--experimental-strip-types\" postgraphile",
+    "build": "tsc && cp src/*.json5 dist/"
   },
   "dependencies": {
     "@grafserv/persisted": "^1.0.0-rc.3",
