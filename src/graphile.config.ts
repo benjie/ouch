@@ -47,6 +47,7 @@ const preset: GraphileConfig.Preset = {
     }),
   ],
   grafserv: {
+    host: process.env.HOST,
     port: 5678,
     websockets: true,
     allowUnpersistedOperation: true,
