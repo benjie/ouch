@@ -3,7 +3,7 @@ import "graphile-config";
 import { makePgService } from "@dataplan/pg/adaptors/pg";
 import AmberPreset from "postgraphile/presets/amber";
 import { makeV4Preset } from "postgraphile/presets/v4";
-import { makePgSmartTagsFromFilePlugin } from "postgraphile/utils";
+import { pgSmartTagsFromFile } from "postgraphile/utils";
 import { PostGraphileConnectionFilterPreset } from "postgraphile-plugin-connection-filter";
 import { PgAggregatesPreset } from "@graphile/pg-aggregates";
 import { PgManyToManyPreset } from "@graphile-contrib/pg-many-to-many";
@@ -18,7 +18,7 @@ const __dirname = dirname(__filename);
 
 // For configuration file details, see: https://postgraphile.org/postgraphile/next/config
 
-const TagsFilePlugin = makePgSmartTagsFromFilePlugin(`${__dirname}/tags.json5`);
+const TagsFilePlugin = pgSmartTagsFromFile(`${__dirname}/tags.json5`);
 
 const preset: GraphileConfig.Preset = {
   extends: [
@@ -47,6 +47,7 @@ const preset: GraphileConfig.Preset = {
     }),
   ],
   grafserv: {
+    host: process.env.HOST,
     port: 5678,
     websockets: true,
     allowUnpersistedOperation: true,

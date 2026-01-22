@@ -1,8 +1,11 @@
 {
   "extends": "@benjie/tsconfig/quick.json",
   "compilerOptions": {
-    "noEmit": true
+    "composite": true,
+    "rootDir": "src",
+    "declarationDir": "./dist",
+    "outDir": "./dist"
   },
-  "include": ["./"],
+  "include": ["src"],
   "exclude": ["dist", "build", "node_modules"]
 }

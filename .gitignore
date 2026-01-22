@@ -4,3 +4,5 @@ _LOCAL
 .yarn/*
 !.yarn/releases/*
 !.yarn/plugins/*
+/dist
+/tsconfig.tsbuildinfo
