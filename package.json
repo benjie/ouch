@@ -18,7 +18,7 @@
     "@graphile/simplify-inflection": "^8.0.0-rc.3",
     "express": "^4.18.2",
     "graphile": "^5.0.0-rc.4",
-    "postgraphile": "^5.0.0-rc.5",
+    "postgraphile": "^5.0.0-rc.6",
     "postgraphile-plugin-connection-filter": "^3.0.0-rc.1",
     "ws": "^8.13.0"
   },
