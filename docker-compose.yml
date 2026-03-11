@@ -23,6 +23,7 @@ services:
       - ./yarn.lock:/app/yarn.lock
       - ./.yarn/:/app/.yarn/
       - ./.yarnrc.yml:/app/.yarnrc.yml
+      - ./src:/app/src
       - ./graphile.config.ts:/app/graphile.config.ts
       - ./tags.json5:/app/tags.json5
     environment:
@@ -30,9 +31,5 @@ services:
     entrypoint: >
       sh -c "
         yarn --frozen-lockfile
-        until pg_isready -h postgres -p 5432 -U postgres; do
-          echo 'Waiting for Postgres...';
-          sleep 1;
-        done;
         exec yarn postgraphile -n 0.0.0.0
       "
