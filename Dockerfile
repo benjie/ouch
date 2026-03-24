@@ -51,6 +51,7 @@ COPY --from=clean /app/ /app/
 
 # Install yarn ASAP because it's the slowest
 RUN ["corepack", "enable"]
+RUN apk add --no-cache postgresql-client
 RUN ["yarn", "workspaces", "focus", "-A", "--production"]
 
 LABEL description="My PostGraphile-powered server"

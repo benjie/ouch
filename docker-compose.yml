@@ -1,4 +1,4 @@
-version: '3.8'
+version: "3.8"
 
 services:
   postgres:
@@ -34,5 +34,5 @@ services:
           echo 'Waiting for Postgres...';
           sleep 1;
         done;
-        exec yarn postgraphile -n 0.0.0.0
+        exec yarn start:production -n 0.0.0.0
       "
