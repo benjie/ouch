@@ -2,6 +2,7 @@ import express from "express";
 import { grafserv } from "postgraphile/grafserv/express/v4";
 import { postgraphile } from "postgraphile";
 import preset from "./graphile.config.ts";
+import { test } from "./test.ts";
 
 // Create an express app
 const app = express();
@@ -24,3 +25,5 @@ const server = app.listen(port, host, () => {
 // Mount our Grafserv instance into our Express app, passing the HTTP server so
 // we can attach websocket support.
 serv.addTo(app, server);
+
+test(await serv.getSchema(), serv.getPreset());
