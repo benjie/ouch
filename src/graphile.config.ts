@@ -4,9 +4,9 @@ import { makePgService } from "@dataplan/pg/adaptors/pg";
 import AmberPreset from "postgraphile/presets/amber";
 import { makeV4Preset } from "postgraphile/presets/v4";
 import { pgSmartTagsFromFile } from "postgraphile/utils";
-import { PostGraphileConnectionFilterPreset } from "postgraphile-plugin-connection-filter";
-import { PgAggregatesPreset } from "@graphile/pg-aggregates";
-import { PgManyToManyPreset } from "@graphile-contrib/pg-many-to-many";
+// import { PostGraphileConnectionFilterPreset } from "postgraphile-plugin-connection-filter";
+// import { PgAggregatesPreset } from "@graphile/pg-aggregates";
+// import { PgManyToManyPreset } from "@graphile-contrib/pg-many-to-many";
 // import { PgSimplifyInflectionPreset } from "@graphile/simplify-inflection";
 import PersistedPlugin from "@grafserv/persisted";
 import { PgOmitArchivedPlugin } from "@graphile-contrib/pg-omit-archived";
@@ -28,9 +28,9 @@ const preset: GraphileConfig.Preset = {
       graphiql: true,
       graphiqlRoute: "/",
     }),
-    PostGraphileConnectionFilterPreset,
-    PgManyToManyPreset,
-    PgAggregatesPreset,
+    // PostGraphileConnectionFilterPreset,
+    // PgManyToManyPreset,
+    // PgAggregatesPreset,
     // PgSimplifyInflectionPreset
   ],
   plugins: [PersistedPlugin.default, PgOmitArchivedPlugin, TagsFilePlugin],
